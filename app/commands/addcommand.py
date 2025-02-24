@@ -15,6 +15,6 @@ class Add(Command):
             result = Calculator.add(x, y)
             print(f"{x} + {y} = {result}")
         except InvalidOperation:
-            print(f"{x} or {y} is a invalid input. Please enter valid inputs.")
+            print(f"One of the entered numbers is invalid. Please enter valid inputs.")
         except Exception as e:
             print(f"{e}")
