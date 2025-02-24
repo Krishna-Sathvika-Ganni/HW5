@@ -1,6 +1,6 @@
 '''Calculator Test'''
-from app.calculator import Calculator
 from faker import Faker
+from app.calculator import Calculator
 
 fake=Faker()
 
