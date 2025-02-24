@@ -1,4 +1,4 @@
-from app.commands.addcommand import add 
+from app.commands.addcommand import Add 
 from app.commands.menucommand import Menu
 from app.commands import CommandHandler
 
