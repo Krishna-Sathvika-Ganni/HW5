@@ -13,7 +13,6 @@ class App:
         self.command_handler.Execute_Command("Menu")
         while True:
             c=input("Enter the command:").strip()
-            print(f"Entered command: {c}")
             if c.lower() == "exit":
                 print("Exiting..")
                 break
