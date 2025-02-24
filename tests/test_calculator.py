@@ -1,24 +1,35 @@
 '''Calculator Test'''
 from app.calculator import Calculator
+from faker import Faker
+
+fake=Faker()
 
 def test_addition():
     '''Test that addition function works '''  
-    cal=Calculator()
-    assert cal.add(5,2) == 7
+    x=fake.random_int(min=0,max=50)
+    y=fake.random_int(min=0,max=50)
+    expected=x+y
+    assert Calculator.add(x,y)==expected
 
 def test_subtraction():
     '''Test that subtraction function works '''   
-    cal=Calculator()
-    assert cal.subtract(3,2) == 1
+    x=fake.random_int(min=0,max=50)
+    y=fake.random_int(min=0,max=50)
+    expected=x-y
+    assert Calculator.subtract(x,y)==expected
 
 def test_multiplication():
     '''Test that Multiplication function works'''
-    cal=Calculator()
-    assert cal.multiply(3,4) == 12
+    x=fake.random_int(min=0,max=50)
+    y=fake.random_int(min=0,max=50)
+    expected=x*y
+    assert Calculator.multiply(x,y)==expected
 
 def test_division():
     '''Test that Division function works'''
-    cal=Calculator()
-    assert cal.divide(10,5) == 2
+    x=fake.random_int(min=0,max=50)
+    y=fake.random_int(min=0,max=50)
+    expected=x/y
+    assert Calculator.divide(x,y)==expected
 
 #End
