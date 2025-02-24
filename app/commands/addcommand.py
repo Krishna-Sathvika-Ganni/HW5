@@ -7,7 +7,7 @@ class Add(Command):
         if not args:  # This prompts for input, if arguments are not given
             args = input("Enter two numbers separated by space: ").split()
         if len(args) != 2:  # Makes sure that only two arguments must be given
-            print("Usage: add <number1> <number2>")
+            print("Only two aguments must be given")
             return
 
         try:
@@ -15,6 +15,6 @@ class Add(Command):
             result = Calculator.add(x, y)
             print(f"{x} + {y} = {result}")
         except InvalidOperation:
-            print("Enter valid inputs.")
+            print("{x} or {y} is a invalid input. Please enter valid inputs.")
         except Exception as e:
             print(f"{e}")
