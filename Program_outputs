@@ -1,0 +1,79 @@
+Outputs:
+
+-> python3 main.py
+
+(my_env) my_envkrishnasathvikaganni@krishnas-MacBook-Air HW5 % python3 main.py
+Registered command: Add
+Registered command: Subtract
+Registered command: Multiply
+Registered command: Divide
+Registered command: Menu
+This is the calculator program. Enter Menu to see the commands available
+Commands Available:
+-> Add
+-> Subtract
+-> Multiply
+-> Divide
+-> Menu
+Type 'exit' to quit
+Enter the command:
+
+-> For addition:
+
+Enter the command:Add 1 9
+1 + 9 = 10
+Enter the command:Add
+Enter two numbers separated by space: 4 2
+4 + 2 = 6
+Enter the command:Add 2 3 0
+Only two arguments must be given
+Enter the command:Add x 3
+One of the entered numbers is invalid. Please enter valid inputs.
+Enter the command:Add 3 y
+One of the entered numbers is invalid. Please enter valid inputs.
+
+-> For Subtraction:
+
+Enter the command:Subtract 4 2
+4 - 2 = 2
+Enter the command:Subtract 
+Enter two numbers separated by space: 9 7
+9 - 7 = 2
+Enter the command:Subtract 2 4 5
+Only two arguments must be given.
+Enter the command:subtract 
+subtract :Command not found
+
+-> For Multiplication:
+
+Enter the command:Multiply 3 4
+3 x 4 = 12
+Enter the command:Multiply 
+Enter two numbers separated by space: 0
+Only two aguments must be given
+Enter the command:Multiply 
+Enter two numbers separated by space: 0 6
+0 x 6 = 0
+
+-> For Division:
+
+Enter the command:Divide 4 2
+4 / 2 = 2
+Enter the command:Divide 
+Enter two numbers separated by space: 10 0
+Cannot be divided by zero
+
+-> Menu:
+Enter the command:Menu
+Commands Available:
+-> Add
+-> Subtract
+-> Multiply
+-> Divide
+-> Menu
+Type 'exit' to quit
+
+-> exit:
+Enter the command:exit
+Exiting..
+(my_env) my_envkrishnasathvikaganni@krishnas-MacBook-Air HW5 % 
