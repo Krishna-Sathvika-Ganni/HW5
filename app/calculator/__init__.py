@@ -1,6 +1,6 @@
-from calculator.operations import add, subtract, multiply, divide
-from calculator.calculations import Calculations
-from calculator.calculation import Calculation
+from app.operation.operations import add, subtract, multiply, divide
+from app.calculator.calculations import Calculations
+from app.calculator.calculation import Calculation
 from decimal import Decimal
 from typing import Callable
 

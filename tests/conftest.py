@@ -3,7 +3,7 @@
 from decimal import Decimal
 from faker import Faker
 import pytest
-from calculator.operations import add, subtract, multiply, divide
+from app.operation.operations import add, subtract, multiply, divide
 
 fake = Faker()
 '''Initalizing the faker object'''

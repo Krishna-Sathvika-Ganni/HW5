@@ -1,4 +1,4 @@
-from calculator.operations import add, subtract, multiply, divide
+from app.operation.operations import add, subtract, multiply, divide
 from decimal import Decimal
 from typing import Callable
 

@@ -1,5 +1,5 @@
 import sys
-from calculator import Calculator
+from app.calculator import Calculator
 from decimal import Decimal, InvalidOperation
 
 def calculate_and_print(x, y, operation_name):

@@ -1,8 +1,8 @@
 '''Testing operations'''
 from decimal import Decimal
 import pytest
-from calculator.calculation import Calculation
-from calculator.operations import add, subtract, multiply, divide
+from app.calculator.calculation import Calculation
+from app.operation.operations import add, subtract, multiply, divide
 
 def test_operation_add():
     '''Testing the addition operation'''
