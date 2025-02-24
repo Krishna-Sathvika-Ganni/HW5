@@ -1,6 +1,7 @@
 from app.commands.addcommand import Add 
 from app.commands.subtractcommand import Subtract
 from app.commands.multiplycommand import Multiply
+from app.commands.dividecommand import Divide
 from app.commands.menucommand import Menu
 from app.commands import CommandHandler
 
@@ -10,6 +11,7 @@ class App:
         self.command_handler.Register_Command("Add", Add())
         self.command_handler.Register_Command("Subtract",Subtract())
         self.command_handler.Register_Command("Multiply", Multiply())
+        self.command_handler.Register_Command("Divide", Divide())
         self.command_handler.Register_Command("Menu", Menu(self.command_handler))
 
     def start(self):
