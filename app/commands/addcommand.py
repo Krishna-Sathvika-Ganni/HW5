@@ -7,7 +7,7 @@ class Add(Command):
         if not args:  # This prompts for input, if arguments are not given
             args = input("Enter two numbers separated by space: ").split()
         if len(args) != 2:  # Makes sure that only two arguments must be given
-            print("Only two aguments must be given")
+            print("Only two arguments must be given")
             return
 
         try:
