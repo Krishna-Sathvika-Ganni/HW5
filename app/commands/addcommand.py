@@ -5,8 +5,7 @@ from app.commands import Command
 class Add(Command):
     def execute(self, *args):
         if not args:  # If no arguments are provided, prompt for input
-            x=input("Enter number 1:")
-            y=input("Enter number 2:")
+            args = input("Enter two numbers separated by space: ").split()
         if len(args) != 2:  # Ensure exactly two arguments
             print("Usage: add <number1> <number2>")
             return
