@@ -13,7 +13,7 @@ class Divide(Command):
         try:
             x, y = map(Decimal, args) 
             if y==0:
-                print("Cannot be divided by zero error")
+                print("Cannot be divided by zero")
                 return 
             result = Calculator.divide(x, y)
             print(f"{x} / {y} = {result}")
