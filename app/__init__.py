@@ -5,7 +5,7 @@ from app.commands import CommandHandler
 class App:
     def __init__(self):
         self.command_handler=CommandHandler()
-        self.command_handler.Register_Command("Add", add())
+        self.command_handler.Register_Command("Add", Add())
         self.command_handler.Register_Command("Menu", Menu(self.command_handler))
 
     def start(self):
