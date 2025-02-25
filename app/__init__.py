@@ -1,8 +1,13 @@
-from app.plugins import addcommand, subtractcommand, multiplycommand, dividecommand, menucommand
 import pkgutil
 import importlib
 import inspect
 from app.commands import Command, CommandHandler
+from app.plugins import addcommand
+from app.plugins.addcommand import Add
+from app.plugins.subtractcommand import Subtract
+from app.plugins.multiplycommand import Multiply
+from app.plugins.dividecommand import Divide
+from app.plugins.menucommand import Menu
 
 class App:
     def __init__(self):
@@ -12,11 +17,11 @@ class App:
 
     def register_core_commands(self):
         """ Register core commands directly in the app """
-        self.command_handler.Register_Command("Add", addcommand())
-        self.command_handler.Register_Command("Subtract", subtractcommand())
-        self.command_handler.Register_Command("Multiply", multiplycommand())
-        self.command_handler.Register_Command("Divide", dividecommand())
-        self.command_handler.Register_Command("Menu", menucommand(self.command_handler))
+        self.command_handler.Register_Command("Add", Add())
+        self.command_handler.Register_Command("Subtract", Subtract())
+        self.command_handler.Register_Command("Multiply", Multiply())
+        self.command_handler.Register_Command("Divide", Divide())
+        self.command_handler.Register_Command("Menu", Menu(self.command_handler))
     
     def load_plugins(self):
         '''Dynamically load all plugins from the `app/plugins` directory.'''
