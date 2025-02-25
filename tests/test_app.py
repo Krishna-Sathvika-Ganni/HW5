@@ -1,5 +1,5 @@
+'''This is the test_app file'''
 import pytest
-import sys
 from app import App
 
 def test_app_start_exit_command(monkeypatch):
@@ -19,11 +19,6 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     app = App()
     with pytest.raises(SystemExit):
         app.start()
-    
-    # Optionally, check for specific exit code or message
-    # assert excinfo.value.code == expected_exit_code
-    
-    # Verify that the unknown command was handled as expected
+
     captured = capfd.readouterr()
     assert "unknown_command : Command not found" in captured.out, "App should notify user of unknown command"
-
