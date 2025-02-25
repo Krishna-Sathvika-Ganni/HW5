@@ -20,19 +20,20 @@ class App:
                     item = getattr(plugin_module, item_name)
                     try:
                         if issubclass(item, Command) and item is not Command:
-                            self.command_handler.Register_Command(item_name, item())
+                            self.command_handler.Register_Command(item_name.lower(), item())
+                            print(f"Registered command: {item_name.lower()}")
                     except TypeError:
                         continue  # If item is not a class or unrelated class, just ignore
 
     def start(self):
         """Start the REPL loop for user interaction."""
-        print("Welcome to Calculator! Type 'menu' to see available commands, or 'exit' to quit.")
+        print("This is the calculator program! Type 'menu' to see available commands, or 'exit' to quit.")
         self.command_handler.Execute_Command("Menu")  # Show available commands at startup
 
         while True:
-            c = input("Enter the command: ").strip()
+            c = input("Enter the command: ").strip().lower()
             if c.lower() == "exit":
                 print("Exiting...")
                 break
             else:
-                self.command_handler.Execute_Command(*c.split())
+                self.command_handler.Execute_Command(c)
