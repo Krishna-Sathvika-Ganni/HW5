@@ -1,25 +1,43 @@
-'''This is test_command file'''
+"""Test suite for Calculator Command classes."""
+
+from unittest.mock import patch
 import pytest
-from app import App
+from app.plugins import addcommand
+from app.plugins import subtractcommand
+from app.plugins import multiplycommand
+from app.plugins import dividecommand
 from app.plugins.addcommand import Add
 from app.plugins.subtractcommand import Subtract
 from app.plugins.multiplycommand import Multiply
 from app.plugins.dividecommand import Divide
-from app.plugins.menucommand import Menu
+
+
 
 @pytest.fixture
-def app():
-    return App()
+def add_command():
+    """Fixture to create AddCommand instance."""
+    return addcommand()
+
 
 @pytest.fixture
-class MockCommandHandler:
-    """Mocked CommandHandler class."""
-    def Get_Registered_Commands(self):
-        """Return a list of registered commands."""
-        return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
+def subtract_command():
+    """Fixture to create SubtractCommand instance."""
+    return subtractcommand()
 
-# Testing the add command
-def test_add_command(app,capfd):
+
+@pytest.fixture
+def multiply_command():
+    """Fixture to create MultiplyCommand instance."""
+    return multiplycommand()
+
+
+@pytest.fixture
+def divide_command():
+    """Fixture to create DivideCommand instance."""
+    return dividecommand()
+
+
+def test_add_command(capfd):
     """Test the Add command."""
     command = Add()
     command.execute('2', '3')
