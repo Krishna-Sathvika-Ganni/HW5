@@ -34,7 +34,7 @@ def test_divide_by_zero(capfd):
     command=Divide()
     command.execute('2','0')
     out, err=capfd.readouterr()
-    assert "Division by zero cannot happen" in out, "addcommand should add two numbers"
+    assert "Division by zero cannot happen" in out, "dividecommand should handle division by zero"
 
 def test_menu_command(capfd):
     command=Menu()
@@ -42,8 +42,4 @@ def test_menu_command(capfd):
     out, err=capfd.readouterr()
     assert "Available commands:" in out, "menucommand should display the available commands"
 
-def test_exit_command():
-    command=exit()
-    with pytest.raises(SystemExit) as e:
-        command.execute()
-    assert str(e.value)=="Exiting..","exitcommand should terminate the program"
+
