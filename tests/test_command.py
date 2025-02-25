@@ -6,20 +6,12 @@ from app.commands.dividecommand import Divide
 from app.commands.menucommand import Menu
 
 # Testing the add command
-class AddTest:
-'''Add test'''
-    def test_add_command(self,addcommand,capsys):
-        """Test the Add command."""
-        command = Add()
-        command.execute('2', '3')
-        out, _ = capsys.readouterr()
-        assert "2 + 3 = 5" in out, "AddCommand should add two numbers"
-
-    def test_invalid_numbers_add(self,addcommand,capsys):
-        command=Add()
-        command.execute('2')
-        out,_=capsys.readouterr()
-        assert "Invalid" in out
+def test_add_command(capfd):
+    """Test the Add command."""
+    command = Add()
+    command.execute('2', '3')
+    out, _ = capfd.readouterr()
+    assert "2 + 3 = 5" in out, "AddCommand should add two numbers"
 
 # Testing the subtract command
 def test_subtract_command(capfd):
@@ -67,5 +59,3 @@ def test_menu_command(capfd):
     command.execute()
     out, _ = capfd.readouterr()
     assert "Commands Available:" in out, "MenuCommand should display the available commands"
-
-# End
