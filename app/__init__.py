@@ -10,21 +10,24 @@ class App:
         self.load_plugins()  # Load plugins dynamically
 
     def load_plugins(self):
-        """Dynamically load all plugins from the `app/plugins` directory."""
-        plugins_package = "app.plugins"
-        for _, plugin_name, _ in pkgutil.iter_modules([plugins_package.replace(".", "/")]):
-            try:
-                plugin_module = importlib.import_module(f"{plugins_package}.{plugin_name}")
-                for item_name in dir(plugin_module):
-                    item = getattr(plugin_module, item_name)
-                    if isinstance(item, type) and issubclass(item, Command) and item is not Command:
-                        init_signature = inspect.signature(item.__init__)
-                        if len(init_signature.parameters) > 1:
-                            self.command_handler.Register_Command(plugin_name.replace("_command", ""), item(self.command_handler))
-                        else:
-                            self.command_handler.Register_Command(plugin_name.replace("_command", ""), item())
-            except Exception as e:
-                print(f"Failed to load plugin {plugin_name}: {e}")
+    """Dynamically load all plugins from the `app/plugins` directory."""
+    plugins_package = "app.plugins"
+    for _, plugin_name, _ in pkgutil.iter_modules([plugins_package.replace(".", "/")]):
+        try:
+            plugin_module = importlib.import_module(f"{plugins_package}.{plugin_name}")
+            for item_name in dir(plugin_module):
+                item = getattr(plugin_module, item_name)
+                if isinstance(item, type) and issubclass(item, Command) and item is not Command:
+                    init_signature = inspect.signature(item.__init__)
+                    if len(init_signature.parameters) > 1:
+                        # If the command class requires arguments like 'command_handler', pass them
+                        self.command_handler.Register_Command(plugin_name.replace("_command", ""), item(self.command_handler))
+                    else:
+                        # If no arguments are required, just initialize the class
+                        self.command_handler.Register_Command(plugin_name.replace("_command", ""), item())
+        except Exception as e:
+            print(f"Failed to load plugin {plugin_name}: {e}")
+
 
     def start(self):
         """Start the REPL loop for user interaction."""
