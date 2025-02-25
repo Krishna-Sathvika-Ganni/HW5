@@ -27,4 +27,4 @@ class App:
         self.load_plugins()
         print("Type 'exit' to exit.")
         while True:  #REPL Read, Evaluate, Print, Loop
-            self.command_handler.execute_command(input(">>> ").strip())
+            self.command_handler.Execute_Command(input(">>> ").strip())
