@@ -27,4 +27,4 @@ class App:
         print("Type 'exit' to exit.")
         while True:  # REPL (Read, Evaluate, Print, Loop)
             user_input = input(">>> ").strip().lower()  # Convert to lowercase for easier matching
-            self.command_handler.execute_command(user_input)
+            self.command_handler.Execute_Command(user_input)
