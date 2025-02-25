@@ -3,6 +3,7 @@ import importlib
 import inspect
 from app.commands import Command
 from app.commands import CommandHandler
+from app.plugins.menucommand import Menu
 
 class App:
     def __init__(self):
@@ -35,7 +36,7 @@ class App:
                 print("Exiting...")
                 break
             elif c=="Menu":
-                self.command_handler.Execute_Command("Menu")
+                self.command_handler.Execute_Command("menucommand")
 
             else:
                 self.command_handler.Execute_Command(c)
