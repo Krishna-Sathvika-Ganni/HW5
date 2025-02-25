@@ -25,5 +25,5 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     
     # Verify that the unknown command was handled as expected
     captured = capfd.readouterr()
-    assert "unknown_command :Command not found" in captured.out, "App should notify user of unknown command"
+    assert "unknown_command : Command not found" in captured.out, "App should notify user of unknown command"
 
