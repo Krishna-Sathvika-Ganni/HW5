@@ -1,6 +1,6 @@
 # pylint: disable=missing-class-docstring
 '''This is test_command file'''
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import pytest
 from app.plugins.addcommand import Add
 from app.plugins.subtractcommand import Subtract
@@ -9,35 +9,39 @@ from app.plugins.dividecommand import Divide
 from app.plugins.menucommand import Menu
 
 @pytest.fixture
-def add_command():
-    '''Fixture'''
-    return Add()
+def mock_command_handler():
+    '''Mock_command_handler'''
+    mock_handler=Mock()
+    mock_handler.Register_Command=Mock()
+    mock_handler.Execute_Command=Mock()
+    return mock_handler
 
 @pytest.fixture
-def subtract_command():
+def add_command(mock_command_handler):
     '''Fixture'''
-    return Subtract()
+    return Add(command_handler=mock_command_handler)
 
 @pytest.fixture
-def multiply_command():
+def subtract_command(mock_command_handler):
     '''Fixture'''
-    return Multiply()
+    return Subtract(command_handler=mock_command_handler)
 
 @pytest.fixture
-def divide_command():
+def multiply_command(mock_command_handler):
     '''Fixture'''
-    return Divide()
+    return Multiply(command_handler=mock_command_handler)
 
 @pytest.fixture
-def menu_command():
+def divide_command(mock_command_handler):
+    '''Fixture'''
+    return Divide(command_handler=mock_command_handler)
+
+@pytest.fixture
+def menu_command(mock_command_handler):
     '''Fixture for Menu Command'''
-    class MockCommandHandler:
-        '''Mock CommandHandler class'''
-        def get_registered_commands(self):
-            '''Return a list of registered commands'''
-            return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
-    command_handler = MockCommandHandler()
-    return Menu(command_handler)
+    # Correct the MockCommandHandler to return the list of commands
+    mock_command_handler.Get_Registered_Commands = Mock(return_value=["Add", "Subtract", "Multiply", "Divide", "Menu"])
+    return Menu(command_handler=mock_command_handler)
 # Testing the add command
 class TestAddCommand:
     '''Test the Add command.'''
