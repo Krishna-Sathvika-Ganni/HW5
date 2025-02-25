@@ -7,18 +7,18 @@ from app.commands.menucommand import Menu
 
 # Testing the add command
 class AddTest:
-
-    def test_add_command(capfd):
+'''Add test'''
+    def test_add_command(self,addcommand,capsys):
         """Test the Add command."""
         command = Add()
         command.execute('2', '3')
-        out, _ = capfd.readouterr()
+        out, _ = capsys.readouterr()
         assert "2 + 3 = 5" in out, "AddCommand should add two numbers"
 
-    def test_invalid_numbers_add(capfd):
+    def test_invalid_numbers_add(self,addcommand,capsys):
         command=Add()
         command.execute('2')
-        out,_=capfd.readouterr()
+        out,_=capsys.readouterr()
         assert "Invalid" in out
 
 # Testing the subtract command
