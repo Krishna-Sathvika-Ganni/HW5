@@ -7,7 +7,7 @@ class Menu(Command):
      self.command_handler=command_handler
 
     def execute(self, *args):
-        commands=self.command_handler.Get_Registered_Commands()
+        commands=self.command_handler.get_registered_commands()
 
         if not commands:
             print("There are no commands")

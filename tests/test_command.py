@@ -50,7 +50,7 @@ def test_menu_command(capfd):
     """Test that the Menu command displays the list of available commands."""
     class MockCommandHandler:
         """Mocked CommandHandler class."""
-        def Get_Registered_Commands(self):
+        def get_registered_commands(self):
             """Return a list of registered commands."""
             return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
 
