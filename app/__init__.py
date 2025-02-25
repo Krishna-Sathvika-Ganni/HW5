@@ -1,13 +1,8 @@
 import pkgutil
 import importlib
 import inspect
-from app.commands import Command, CommandHandler
-from app.plugins import addcommand
-from app.plugins.addcommand import Add
-from app.plugins.subtractcommand import Subtract
-from app.plugins.multiplycommand import Multiply
-from app.plugins.dividecommand import Divide
-from app.plugins.menucommand import Menu
+from app.commands import Command
+from app.commands import CommandHandler
 
 class App:
     def __init__(self):
@@ -15,13 +10,6 @@ class App:
         self.register_core_commands()
         self.load_plugins()  # Load plugins dynamically
 
-    def register_core_commands(self):
-        """ Register core commands directly in the app """
-        self.command_handler.Register_Command("Add", Add())
-        self.command_handler.Register_Command("Subtract", Subtract())
-        self.command_handler.Register_Command("Multiply", Multiply())
-        self.command_handler.Register_Command("Divide", Divide())
-        self.command_handler.Register_Command("Menu", Menu(self.command_handler))
     
     def load_plugins(self):
         '''Dynamically load all plugins from the `app/plugins` directory.'''
@@ -33,7 +21,7 @@ class App:
                     item = getattr(plugin_module, item_name)
                     try:
                         if issubclass(item, Command) and item is not Command:
-                            self.command_handler.Register_Command(plugin_name.replace("command", ""), item())
+                            self.command_handler.Register_Command(item_name, item())
                     except TypeError:
                         continue  # If item is not a class or unrelated class, just ignore
 
@@ -47,7 +35,5 @@ class App:
             if c.lower() == "exit":
                 print("Exiting...")
                 break
-            user_input_split = c.split()
-            command_name = user_input_split[0]
-            args = user_input_split[1:]
-            self.command_handler.Execute_Command(command_name, *args)
+            else:
+                self.command_handler.Execute_Command(*c.split())
