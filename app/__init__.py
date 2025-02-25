@@ -5,13 +5,8 @@ from app.commands import CommandHandler, Command
 class App:
     def __init__(self):
         self.command_handler = CommandHandler()
-        self.load_core_commands()  # Load core commands like Add, Subtract, etc.
         self.load_plugins()  # Automatically load plugins
 
-    def load_core_commands(self):
-        # Register the core commands here manually, if needed
-        pass
-    
     def load_plugins(self):
         # Dynamically load all plugins from the 'app.plugins' package
         plugins_package = 'app.plugins'
