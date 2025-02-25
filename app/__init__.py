@@ -1,13 +1,12 @@
 import pkgutil
 import importlib
-import inspect
 from app.commands import CommandHandler
 from app.commands import Command
 
 class App:
     def __init__(self):
-        self.command_handler=CommandHandler()
-        self.load_plugins() # Loading plugins dynamically
+        self.command_handler = CommandHandler()
+        self.load_plugins()  # Load plugins only once here
 
     def load_plugins(self):
         # Dynamically load all plugins in the plugins directory
@@ -18,13 +17,14 @@ class App:
                 for item_name in dir(plugin_module):
                     item = getattr(plugin_module, item_name)
                     try:
-                        if issubclass(item, (Command)):  
-                            self.command_handler.register_command(plugin_name, item())
+                        if issubclass(item, Command):  # Check if item is a subclass of Command
+                            self.command_handler.register_command(plugin_name.lower(), item())  # Lowercase plugin name for consistency
                     except TypeError:
                         continue  # If item is not a class or unrelated class, just ignore
+
     def start(self):
         print("This is the calculator program. Enter Menu to see the commands available")
-        self.load_plugins()
         print("Type 'exit' to exit.")
-        while True:  #REPL Read, Evaluate, Print, Loop
-            self.command_handler.Execute_Command(input(">>> ").strip())
+        while True:  # REPL (Read, Evaluate, Print, Loop)
+            user_input = input(">>> ").strip().lower()  # Convert to lowercase for easier matching
+            self.command_handler.execute_command(user_input)
