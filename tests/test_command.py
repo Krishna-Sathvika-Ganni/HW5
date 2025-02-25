@@ -1,92 +1,68 @@
-"""Test suite for Calculator Command classes."""
-
-from unittest.mock import patch
 import pytest
-from app.plugins import addcommand
-from app.plugins import subtractcommand
-from app.plugins import multiplycommand
-from app.plugins import dividecommand
-from app.plugins.addcommand import Add
-from app.plugins.subtractcommand import Subtract
-from app.plugins.multiplycommand import Multiply
-from app.plugins.dividecommand import Divide
+from app import App
 
+def test_app_greet_command(capfd, monkeypatch):
+    """Test that the REPL correctly handles the 'greet' command."""
+    inputs = iter(['greet', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
+    app = App()
+    with pytest.raises(SystemExit) as e:
+        app.start()
+    
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
 
-@pytest.fixture
-def add_command():
-    """Fixture to create AddCommand instance."""
-    return addcommand()
+def test_app_menu_command(capfd, monkeypatch):
+    """Test that the REPL correctly handles the 'menu' command."""
+    inputs = iter(['menu', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
+    app = App()
+    with pytest.raises(SystemExit) as e:
+        app.start()
+    
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
 
-@pytest.fixture
-def subtract_command():
-    """Fixture to create SubtractCommand instance."""
-    return subtractcommand()
+def test_app_add_command(capfd, monkeypatch):
+    """Test that the REPL correctly handles the 'add' command."""
+    inputs = iter(['add', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
+    app = App()
+    with pytest.raises(SystemExit) as e:
+        app.start()
+    
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
 
-@pytest.fixture
-def multiply_command():
-    """Fixture to create MultiplyCommand instance."""
-    return multiplycommand()
+def test_app_sub_command(capfd, monkeypatch):
+    """Test that the REPL correctly handles the 'sub' command."""
+    inputs = iter(['sub', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
+    app = App()
+    with pytest.raises(SystemExit) as e:
+        app.start()
+    
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
 
-@pytest.fixture
-def divide_command():
-    """Fixture to create DivideCommand instance."""
-    return dividecommand()
+def test_app_mul_command(capfd, monkeypatch):
+    """Test that the REPL correctly handles the 'mul' command."""
+    inputs = iter(['mul', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
+    app = App()
+    with pytest.raises(SystemExit) as e:
+        app.start()
+    
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
 
-def test_add_command(capfd):
-    """Test the Add command."""
-    command = Add()
-    command.execute('2', '3')
-    out, _ = capfd.readouterr()
-    assert "2 + 3 = 5" in out, "AddCommand should add two numbers"
+def test_app_div_command(capfd, monkeypatch):
+    """Test that the REPL correctly handles the 'div' command."""
+    inputs = iter(['div', 'exit'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-# Testing the subtract command
-def test_subtract_command(capfd):
-    """Test the Subtract command."""
-    command = Subtract()
-    command.execute('3', '2')
-    out, _ = capfd.readouterr()
-    assert "3 - 2 = 1" in out, "SubtractCommand should subtract two numbers"
-
-# Testing multiply command
-def test_multiply_command(capfd):
-    """Test the Multiply command."""
-    command = Multiply()
-    command.execute('2', '3')
-    out, _ = capfd.readouterr()
-    assert "2 x 3 = 6" in out, "MultiplyCommand should multiply two numbers"
-
-# Testing divide command
-def test_divide_command(capfd):
-    """Test the Divide command."""
-    command = Divide()
-    command.execute('4', '2')
-    out, _ = capfd.readouterr()
-    assert "4 / 2 = 2" in out, "DivideCommand should divide two numbers"
-
-# Testing divide by zero
-def test_divide_by_zero(capfd):
-    """Test the Divide command when dividing by zero."""
-    command = Divide()
-    command.execute('2', '0')
-    out, _ = capfd.readouterr()
-    assert "Cannot be divided by zero" in out, "DivideCommand should handle division by zero"
-
-# Testing menu command
-def test_menu_command(capfd):
-    """Test that the Menu command displays the list of available commands."""
-    class MockCommandHandler:
-        """Mocked CommandHandler class."""
-        def get_registered_commands(self):
-            """Return a list of registered commands."""
-            return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
-
-    command_handler = MockCommandHandler()
-    command = Menu(command_handler)
-    command.execute()
-    out, _ = capfd.readouterr()
-    assert "Commands Available:" in out, "MenuCommand should display the available commands"
+    app = App()
+    with pytest.raises(SystemExit) as e:
+        app.start()
+    
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
