@@ -27,8 +27,8 @@ class App:
             if c == "exit":
                 print("Exiting..")
                 break
-            else:
-                parts = c.split()
-                command_name = parts[0]  # First word is the command
-                args = parts[1:]
-                self.command_handler.Execute_Command(c)
+        
+            user_input_split = c.split()
+            command_name = user_input_split[0]
+            args = user_input_split[1:]
+            self.command_handler.Execute_Command(command_name, *args)
