@@ -36,7 +36,7 @@ class App:
                 print("Exiting...")
                 break
             elif c=="Menu":
-                self.command_handler.Execute_Command("menucommand")
+                self.command_handler.Execute_Command("Menu",Menu(self.command_handler))
 
             else:
                 self.command_handler.Execute_Command(c)
