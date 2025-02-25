@@ -16,5 +16,7 @@ class Multiply(Command):
             print(f"{x} x {y} = {result}")
         except InvalidOperation:
             print(f"One of the entered numbers is invalid. Please enter valid inputs.")
+        except ValueError as ve:  # Catch ValueError and print it
+            print(f"{ve}")
         except Exception as e:
             print(f"{e}")

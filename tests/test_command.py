@@ -1,70 +1,175 @@
+# pylint: disable=missing-class-docstring
 '''This is test_command file'''
-from app.commands import addcommand
-from app.commands import subtractcommand
-from app.commands import multiplycommand
-from app.commands import dividecommand
-from app.commands import menucommand
+from unittest.mock import patch
+import pytest
+from app.commands.addcommand import Add
+from app.commands.subtractcommand import Subtract
+from app.commands.multiplycommand import Multiply
+from app.commands.dividecommand import Divide
+from app.commands.menucommand import Menu
 
+@pytest.fixture
+def add_command():
+    '''Fixture'''
+    return Add()
+
+@pytest.fixture
+def subtract_command():
+    '''Fixture'''
+    return Subtract()
+
+@pytest.fixture
+def multiply_command():
+    '''Fixture'''
+    return Multiply()
+
+@pytest.fixture
+def divide_command():
+    '''Fixture'''
+    return Divide()
+
+@pytest.fixture
+def menu_command():
+    '''Fixture for Menu Command'''
+    class MockCommandHandler:
+        '''Mock CommandHandler class'''
+        def get_registered_commands(self):
+            '''Return a list of registered commands'''
+            return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
+    command_handler = MockCommandHandler()
+    return Menu(command_handler)
 # Testing the add command
-class test_add_command:
+class TestAddCommand:
     '''Test the Add command.'''
-    def test_add(self,addcommand, capsys):
+    def test_add(self,add_command, capsys):
         '''Testing the add command'''
-        addcommand.execute('2', '3')
+        add_command.execute('2', '3')
         captured=capsys.readouterr()
         assert "2 + 3 = 5" in captured.out
 
-    def test_add_one_argument(self,addcommand, capsys):
+    def test_add_one_argument(self,add_command, capsys):
         '''Testing when only one argument is given'''
-        addcommand.execute('2')
+        add_command.execute('2')
         captured=capsys.readouterr()
-        assert "Only one argument is given" in captured.out
+        assert "Only two arguments must be given" in captured.out
 
+    def test_add_invalid_args(self, add_command,capsys):
+        '''Testing for invalid arguments'''
+        add_command.execute('x','2')
+        captured=capsys.readouterr()
+        assert "One of the entered numbers is invalid. Please enter valid inputs." in captured.out
+
+    def test_add_error(self, add_command, capsys):
+        '''Testing for invalid arguments'''
+        with patch('app.commands.addcommand.Calculator.add', side_effect=ValueError("Error")):
+            add_command.execute('4', '2')
+            captured = capsys.readouterr()
+            assert "Error" in captured.out
 # Testing the subtract command
-def test_subtract_command(capfd):
-    """Test the Subtract command."""
-    command = Subtract()
-    command.execute('3', '2')
-    out, _ = capfd.readouterr()
-    assert "3 - 2 = 1" in out, "SubtractCommand should subtract two numbers"
+class TestSubtractCommand:
+    def test_subtract(self,subtract_command,capsys):
+        '''Testing multiply command'''            
+        subtract_command.execute('4','2')
+        captured=capsys.readouterr()
+        assert "4 - 2 = 2" in captured.out
 
-# Testing multiply command
-def test_multiply_command(capfd):
-    """Test the Multiply command."""
-    command = Multiply()
-    command.execute('2', '3')
-    out, _ = capfd.readouterr()
-    assert "2 x 3 = 6" in out, "MultiplyCommand should multiply two numbers"
+    def test_subtract_one_arg(self,subtract_command,capsys):
+        '''Testing one argument'''
+        subtract_command.execute('4')
+        captured=capsys.readouterr()
+        assert "Only two arguments must be given" in captured.out
 
-# Testing divide command
-def test_divide_command(capfd):
-    """Test the Divide command."""
-    command = Divide()
-    command.execute('4', '2')
-    out, _ = capfd.readouterr()
-    assert "4 / 2 = 2" in out, "DivideCommand should divide two numbers"
+    def test_subtract_invalid_arg(self,subtract_command,capsys):
+        '''Testing invalid argument'''
+        subtract_command.execute('x','3')
+        captured=capsys.readouterr()
+        assert "One of the entered numbers is invalid. Please enter valid inputs." in captured.out
 
-# Testing divide by zero
-def test_divide_by_zero(capfd):
-    """Test the Divide command when dividing by zero."""
-    command = Divide()
-    command.execute('2', '0')
-    out, _ = capfd.readouterr()
-    assert "Cannot be divided by zero" in out, "DivideCommand should handle division by zero"
+    def test_subtract_negative_numbers(self, subtract_command, capsys):
+        '''Testing subtraction with negative numbers'''
+        subtract_command.execute('-5', '3')
+        captured = capsys.readouterr()
+        assert "-5 - 3 = -8" in captured.out
+
+    def test_subtract_error(self, subtract_command, capsys):
+        '''Testing for invalid arguments'''
+        with patch('app.commands.subtractcommand.Calculator.subtract', side_effect=ValueError("Error")):
+            subtract_command.execute('4', '2')
+            captured = capsys.readouterr()
+            assert "Error" in captured.out
+
+
+# Testing the Multiply command:
+class TestMultiplyCommand:
+    def test_multiply(self,multiply_command,capsys):
+        '''Testing multiply command'''
+        multiply_command.execute('4','2')
+        captured=capsys.readouterr()
+        assert "4 x 2 = 8" in captured.out
+
+    def test_multiply_one_arg(self,multiply_command,capsys):
+        '''Testing one argument'''
+        multiply_command.execute('4')
+        captured=capsys.readouterr()
+        assert "Only two aguments must be given" in captured.out
+
+    def test_multiply_invalid_arg(self,multiply_command,capsys):
+        '''Testing invalid argument'''
+        multiply_command.execute('x','3')
+        captured=capsys.readouterr()
+        assert "One of the entered numbers is invalid. Please enter valid inputs." in captured.out
+
+    def test_multiply_error(self, multiply_command, capsys):
+        '''Testing for invalid arguments'''
+        with patch('app.commands.multiplycommand.Calculator.multiply', side_effect=ValueError("Error")):
+            multiply_command.execute('4', '2')
+            captured = capsys.readouterr()
+            assert "Error" in captured.out
+
+# Testing the Multiply command:
+
+class TestDivideCommand:
+    def test_Divide(self,divide_command,capsys):
+        '''Testing Divide command'''
+        divide_command.execute('4','2')
+        captured=capsys.readouterr()
+        assert "4 / 2 = 2" in captured.out
+
+    def test_Divide_one_arg(self,divide_command,capsys):
+        '''Testing one argument'''
+        divide_command.execute('4')
+        captured=capsys.readouterr()
+        assert "Only two aguments must be given" in captured.out
+
+    def test_Divide_invalid_arg(self,divide_command,capsys):
+        '''Testing invalid argument'''
+        divide_command.execute('x','3')
+        captured=capsys.readouterr()
+        assert "One of the entered numbers is invalid. Please enter valid inputs." in captured.out
+
+    def test_Divide_by_zero(self,divide_command,capsys):
+        '''Testing divide by zero'''
+        divide_command.execute('9','0')
+        captured=capsys.readouterr()
+        assert "Cannot be divided by zero" in captured.out
+
+    def test_divide_error(self, divide_command, capsys):
+        '''Testing for invalid arguments'''
+        with patch('app.commands.dividecommand.Calculator.divide', side_effect=ValueError("Error")):
+            divide_command.execute('4', '2')
+            captured = capsys.readouterr()
+            assert "Error" in captured.out
 
 # Testing menu command
-def test_menu_command(capfd):
-    """Test that the Menu command displays the list of available commands."""
-    class MockCommandHandler:
-        """Mocked CommandHandler class."""
-        def get_registered_commands(self):
-            """Return a list of registered commands."""
-            return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
-
-    command_handler = MockCommandHandler()
-    command = Menu(command_handler)
-    command.execute()
-    out, _ = capfd.readouterr()
-    assert "Commands Available:" in out, "MenuCommand should display the available commands"
-
-# End
+class TestMenuCommand:
+    '''Test the Menu command'''
+    def test_menu_command(self, menu_command, capsys):
+        '''Test that the Menu command displays the list of available commands.'''
+        menu_command.execute()
+        captured = capsys.readouterr()
+        assert "Commands Available:" in captured.out, "MenuCommand should display the available commands"
+        assert "Add" in captured.out
+        assert "Subtract" in captured.out
+        assert "Multiply" in captured.out
+        assert "Divide" in captured.out
+        assert "Menu" in captured.out
