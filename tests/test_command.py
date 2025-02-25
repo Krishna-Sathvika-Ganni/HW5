@@ -1,3 +1,4 @@
+'''This is test_command file'''
 from app.commands.addcommand import Add
 from app.commands.subtractcommand import Subtract
 from app.commands.multiplycommand import Multiply
@@ -49,7 +50,6 @@ def test_menu_command(capfd):
     """Test that the Menu command displays the list of available commands."""
     class MockCommandHandler:
         """Mocked CommandHandler class."""
-        
         def get_registered_commands(self):
             """Return a list of registered commands."""
             return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
