@@ -34,5 +34,8 @@ class App:
             if c.lower() == "exit":
                 print("Exiting...")
                 break
+            elif c=="Menu":
+                self.command_handler.Execute_Command("Menu")
+
             else:
                 self.command_handler.Execute_Command(c)
