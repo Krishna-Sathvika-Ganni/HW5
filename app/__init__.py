@@ -21,7 +21,6 @@ class App:
                     try:
                         if issubclass(item, Command) and item is not Command:
                             self.command_handler.Register_Command(item_name.lower(), item())
-                            print(f"Registered command: {item_name.lower()}")
                     except TypeError:
                         continue  # If item is not a class or unrelated class, just ignore
 
