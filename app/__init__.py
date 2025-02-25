@@ -7,7 +7,6 @@ from app.commands import CommandHandler
 class App:
     def __init__(self):
         self.command_handler = CommandHandler()
-        self.register_core_commands()
         self.load_plugins()  # Load plugins dynamically
 
     
