@@ -59,3 +59,4 @@ def test_menu_command(capfd):
     command.execute()
     out, _ = capfd.readouterr()
     assert "Commands Available:" in out, "MenuCommand should display the available commands"
+    
