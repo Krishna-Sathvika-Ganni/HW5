@@ -11,6 +11,13 @@ from app.plugins.menucommand import Menu
 def app():
     return App()
 
+@pytest.fixture
+class MockCommandHandler:
+    """Mocked CommandHandler class."""
+    def Get_Registered_Commands(self):
+        """Return a list of registered commands."""
+        return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
+
 # Testing the add command
 def test_add_command(app,capfd):
     """Test the Add command."""

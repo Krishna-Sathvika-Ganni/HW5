@@ -19,7 +19,8 @@ def test_plugin_load_success_and_failure(capsys, monkeypatch):
         """Mock import_module to simulate a broken plugin."""
         if 'broken_plugin' in name:
             raise ImportError("Mock import error")
-        return importlib.import_module('builtins')  # Load a harmless module for success case
+        return importlib.import_module(name)  # Properly return the requested module
+
     
     # Simulating a working plugin and a failing one
     monkeypatch.setattr(pkgutil, 'iter_modules',
@@ -35,7 +36,7 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     """Test how the REPL handles an unknown command before exiting."""
     # Simulate user entering an unknown command followed by 'exit'
     inputs = iter(['unknown_command', 'exit'])
-    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    monkeypatch.setattr('name.input', lambda _: next(inputs))
 
     app = App()
     with pytest.raises(SystemExit):
