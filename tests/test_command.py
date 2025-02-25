@@ -65,7 +65,7 @@ def test_add_invalid_numbers(capfd):
 # Testing general error handling in AddCommand
 def test_add_general_error(capfd):
     """Test Add command when a general error occurs."""
-    with patch('app.calculation.Calculator.add', side_effect=ValueError("Test error")):
+    with patch('app.calculator.Calculation.add', side_effect=ValueError("Test error")):
         command = Add()
         command.execute("5", "3")
         out, _ = capfd.readouterr()
@@ -90,7 +90,7 @@ def test_subtract_invalid_numbers(capfd):
 # Testing general error handling in SubtractCommand
 def test_subtract_general_error(capfd):
     """Test Subtract command when a general error occurs."""
-    with patch('app.calculation.Calculator.subtract', side_effect=ValueError("Test error")):
+    with patch('app.calculator.Calculation.subtract', side_effect=ValueError("Test error")):
         command = Subtract()
         command.execute("5", "3")
         out, _ = capfd.readouterr()
@@ -115,7 +115,7 @@ def test_multiply_invalid_numbers(capfd):
 # Testing general error handling in MultiplyCommand
 def test_multiply_general_error(capfd):
     """Test Multiply command when a general error occurs."""
-    with patch('app.calculation.Calculator.multiply', side_effect=ValueError("Test error")):
+    with patch('app.calculator.Calculation.multiply', side_effect=ValueError("Test error")):
         command = Multiply()
         command.execute("5", "3")
         out, _ = capfd.readouterr()
@@ -140,7 +140,7 @@ def test_divide_invalid_numbers(capfd):
 # Testing general error handling in DivideCommand
 def test_divide_general_error(capfd):
     """Test Divide command when a general error occurs."""
-    with patch('app.calculation.Calculator.divide', side_effect=ValueError("Test error")):
+    with patch('app.calculator.Calculation.divide', side_effect=ValueError("Test error")):
         command = Divide()
         command.execute("5", "3")
         out, _ = capfd.readouterr()
