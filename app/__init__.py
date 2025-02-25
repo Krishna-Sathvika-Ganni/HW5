@@ -1,44 +1,48 @@
+from app.plugins import addcommand, subtractcommand, multiplycommand, dividecommand, menucommand
 import pkgutil
 import importlib
 import inspect
-from app.commands import CommandHandler
-from app.commands import Command
+from app.commands import Command, CommandHandler
 
 class App:
     def __init__(self):
         self.command_handler = CommandHandler()
+        self.register_core_commands()
         self.load_plugins()  # Load plugins dynamically
 
+    def register_core_commands(self):
+        """ Register core commands directly in the app """
+        self.command_handler.Register_Command("Add", addcommand())
+        self.command_handler.Register_Command("Subtract", subtractcommand())
+        self.command_handler.Register_Command("Multiply", multiplycommand())
+        self.command_handler.Register_Command("Divide", dividecommand())
+        self.command_handler.Register_Command("Menu", menucommand(self.command_handler))
+    
     def load_plugins(self):
         '''Dynamically load all plugins from the `app/plugins` directory.'''
         plugins_package = "app.plugins"
-        for _, plugin_name, _ in pkgutil.iter_modules([plugins_package.replace(".", "/")]):
-            try:
-                plugin_module = importlib.import_module(f"{plugins_package}.{plugin_name}")
+        for _, plugin_name, is_pkg in pkgutil.iter_modules([plugins_package.replace(".", "/")]):
+            if not is_pkg:
+                plugin_module = importlib.import_module(f'{plugins_package}.{plugin_name}') 
                 for item_name in dir(plugin_module):
                     item = getattr(plugin_module, item_name)
-                    if isinstance(item, type) and issubclass(item, Command) and item is not Command:
-                        init_signature = inspect.signature(item.__init__)
-                        if len(init_signature.parameters) > 1:
-                            # If the command class requires arguments like 'command_handler', pass them
-                            self.command_handler.Register_Command(plugin_name.replace("_command", ""), item(self.command_handler))
-                        else:
-                            # If no arguments are required, just initialize the class
-                            self.command_handler.Register_Command(plugin_name.replace("_command", ""), item())
-            except Exception as e:
-                print(f"Failed to load plugin {plugin_name}: {e}")
-
+                    try:
+                        if issubclass(item, Command) and item is not Command:
+                            self.command_handler.Register_Command(plugin_name.replace("command", ""), item())
+                    except TypeError:
+                        continue  # If item is not a class or unrelated class, just ignore
 
     def start(self):
         """Start the REPL loop for user interaction."""
         print("Welcome to Calculator! Type 'menu' to see available commands, or 'exit' to quit.")
-        self.command_handler.Execute_Command("menu")  # Show available commands at startup
+        self.command_handler.Execute_Command("Menu")  # Show available commands at startup
 
         while True:
-            user_input = input("Enter command: ").strip()
-            if user_input.lower() == "exit":
-                raise SystemExit("Exiting Calculator...")
-            user_input_split = user_input.split()
+            c = input("Enter the command: ").strip()
+            if c.lower() == "exit":
+                print("Exiting...")
+                break
+            user_input_split = c.split()
             command_name = user_input_split[0]
             args = user_input_split[1:]
             self.command_handler.Execute_Command(command_name, *args)
