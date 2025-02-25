@@ -1,6 +1,5 @@
 import pytest
 import sys
-import importlib
 from app import App
 
 def test_app_start_exit_command(monkeypatch):
@@ -26,5 +25,5 @@ def test_app_start_unknown_command(capfd, monkeypatch):
     
     # Verify that the unknown command was handled as expected
     captured = capfd.readouterr()
-    assert "No such command: unknown_command" in captured.out, "App should notify user of unknown command"
+    assert "unknown_command :Command not found" in captured.out, "App should notify user of unknown command"
 

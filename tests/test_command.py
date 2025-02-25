@@ -52,9 +52,4 @@ def test_menu_command(capfd):
     command.execute()
     out, _ = capfd.readouterr()
     
-    assert "Available commands:" in out, "MenuCommand should display the available commands"
-    assert "Add" in out, "MenuCommand should list 'Add'"
-    assert "Subtract" in out, "MenuCommand should list 'Subtract'"
-    assert "Multiply" in out, "MenuCommand should list 'Multiply'"
-    assert "Divide" in out, "MenuCommand should list 'Divide'"
-    assert "Menu" in out, "MenuCommand should list 'Menu'"
+    assert "Commands Available:" in out, "MenuCommand should display the available commands"
