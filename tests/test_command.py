@@ -1,19 +1,21 @@
 '''This is test_command file'''
-from app.commands.addcommand import Add
-from app.commands.subtractcommand import Subtract
-from app.commands.multiplycommand import Multiply
-from app.commands.dividecommand import Divide
-from app.commands.menucommand import Menu
+from app.commands import addcommand
+from app.commands import subtractcommand
+from app.commands import multiplycommand
+from app.commands import dividecommand
+from app.commands import menucommand
 
 # Testing the add command
 class test_add_command:
-    """Test the Add command."""
+    '''Test the Add command.'''
     def test_add(self,addcommand, capsys):
+        '''Testing the add command'''
         addcommand.execute('2', '3')
         captured=capsys.readouterr()
         assert "2 + 3 = 5" in captured.out
 
     def test_add_one_argument(self,addcommand, capsys):
+        '''Testing when only one argument is given'''
         addcommand.execute('2')
         captured=capsys.readouterr()
         assert "Only one argument is given" in captured.out
