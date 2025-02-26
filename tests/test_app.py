@@ -7,10 +7,8 @@ def test_app_start_exit_command(monkeypatch):
     # Simulate user entering 'exit'
     monkeypatch.setattr('builtins.input', lambda _: 'exit')
     app = App()
-<<<<<<< HEAD
     inputs=iter(["exit"])
-=======
->>>>>>> Plugins
+
     with pytest.raises(SystemExit):
         app.start()
 

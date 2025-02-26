@@ -3,13 +3,10 @@ from app.calculator import Calculator
 from app.commands import Command
 
 class Add(Command):
-<<<<<<< HEAD:app/commands/addcommand.py
     '''This is the add command class'''
-=======
     def __init__(self, command_handler):
         self.command_handler=command_handler
         
->>>>>>> Plugins:app/plugins/addcommand.py
     def execute(self, *args):
         if not args:  # This prompts for input, if arguments are not given.
             args = input("Enter two numbers separated by space: ").split()
