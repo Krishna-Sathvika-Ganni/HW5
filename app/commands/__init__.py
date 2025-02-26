@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import multiprocessing
 
 class Command(ABC):
     '''This is the abstract base for commands.'''
@@ -20,7 +21,8 @@ class CommandHandler:
         '''Executes a registered command if exists'''
         try:
             if command_name in self.commands:
-                self.commands[command_name].execute(*args)
+                process=multiprocessing.Process(target=self.commands[command_name].execute,args=args)
+                process.start()
                 return True
             else:
                 print(f"{command_name} : Command not found")

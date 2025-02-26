@@ -29,7 +29,7 @@ class App:
                 print(f"Failed to load plugin {plugin_name}: {e}")
 
     def start(self):
-        print("Welcome to the calculator program! Type 'menu' to see available commands, or 'exit' to quit.")
+        print("Welcome to the multiprocessor calculator program! Type 'menu' to see available commands, or 'exit' to quit.")
         self.command_handler.Execute_Command("menu")
         while True:
             try:
