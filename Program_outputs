@@ -3,77 +3,73 @@ Outputs:
 -> python3 main.py
 
 (my_env) my_envkrishnasathvikaganni@krishnas-MacBook-Air HW5 % python3 main.py
-Registered command: Add
-Registered command: Subtract
-Registered command: Multiply
-Registered command: Divide
-Registered command: Menu
-This is the calculator program. Enter Menu to see the commands available
+Registered command: add
+Registered command: divide
+Registered command: menu
+Registered command: multiply
+Registered command: subtract
+Welcome to the calculator program! Type 'menu' to see available commands, or 'exit' to quit.
 Commands Available:
--> Add
--> Subtract
--> Multiply
--> Divide
--> Menu
+-> add
+-> divide
+-> menu
+-> multiply
+-> subtract
 Type 'exit' to quit
-Enter the command:
 
 -> For addition:
 
-Enter the command:Add 1 9
-1 + 9 = 10
-Enter the command:Add
-Enter two numbers separated by space: 4 2
-4 + 2 = 6
-Enter the command:Add 2 3 0
-Only two arguments must be given
-Enter the command:Add x 3
-One of the entered numbers is invalid. Please enter valid inputs.
-Enter the command:Add 3 y
+Enter the command: add
+Enter two numbers separated by space: 1 2
+1 + 2 = 3
+Enter the command: add 2 3
+2 + 3 = 5
+Enter the command: add
+Enter two numbers separated by space: x 1
 One of the entered numbers is invalid. Please enter valid inputs.
 
 -> For Subtraction:
 
-Enter the command:Subtract 4 2
+Enter the command: subtract 4 2
 4 - 2 = 2
-Enter the command:Subtract 
-Enter two numbers separated by space: 9 7
-9 - 7 = 2
-Enter the command:Subtract 2 4 5
-Only two arguments must be given.
-Enter the command:subtract 
-subtract :Command not found
+Enter the command: subtract
+Enter two numbers separated by space: 2 y
+One of the entered numbers is invalid. Please enter valid inputs.
+Enter the command: 
 
 -> For Multiplication:
 
-Enter the command:Multiply 3 4
+Enter the command: multiply 3 4
 3 x 4 = 12
-Enter the command:Multiply 
-Enter two numbers separated by space: 0
-Only two aguments must be given
-Enter the command:Multiply 
-Enter two numbers separated by space: 0 6
-0 x 6 = 0
+Enter the command: multiply
+Enter two numbers separated by space: 3 0
+3 x 0 = 0
+Enter the command: 
 
 -> For Division:
 
 Enter the command:Divide 4 2
-4 / 2 = 2
-Enter the command:Divide 
-Enter two numbers separated by space: 10 0
+Enter the command: divide
+Enter two numbers separated by space: 2 0
 Cannot be divided by zero
 
 -> Menu:
-Enter the command:Menu
+Enter the command: Menu
 Commands Available:
--> Add
--> Subtract
--> Multiply
--> Divide
--> Menu
+-> add
+-> divide
+-> menu
+-> multiply
+-> subtract
 Type 'exit' to quit
+Enter the command: 
 
 -> exit:
-Enter the command:exit
+Enter the command: exit
 Exiting..
 (my_env) my_envkrishnasathvikaganni@krishnas-MacBook-Air HW5 % 
+
+-> No command found:
+Enter the command: hello
+hello : Command not found
+Error: 'hello' is not a recognized command
