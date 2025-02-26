@@ -4,7 +4,7 @@ class Menu(Command):
     '''This displays available commands in the system'''
    
     def __init__(self, command_handler):
-     self.command_handler=command_handler
+        self.command_handler=command_handler
 
     def execute(self, *args):
         commands=self.command_handler.get_registered_commands()

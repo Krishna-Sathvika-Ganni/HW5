@@ -38,7 +38,7 @@ def menu_command():
             return ["Add", "Subtract", "Multiply", "Divide", "Menu"]
     command_handler = MockCommandHandler()
     return Menu(command_handler)
-# Testing the add command
+
 class TestAddCommand:
     '''Test the Add command.'''
     def test_add(self,add_command, capsys):
@@ -65,8 +65,9 @@ class TestAddCommand:
             add_command.execute('4', '2')
             captured = capsys.readouterr()
             assert "Error" in captured.out
-# Testing the subtract command
+
 class TestSubtractCommand:
+    '''Testing the subtract command'''
     def test_subtract(self,subtract_command,capsys):
         '''Testing multiply command'''            
         subtract_command.execute('4','2')
@@ -99,8 +100,9 @@ class TestSubtractCommand:
             assert "Error" in captured.out
 
 
-# Testing the Multiply command:
+
 class TestMultiplyCommand:
+    '''Testing the Multiply command:'''
     def test_multiply(self,multiply_command,capsys):
         '''Testing multiply command'''
         multiply_command.execute('4','2')
@@ -111,7 +113,7 @@ class TestMultiplyCommand:
         '''Testing one argument'''
         multiply_command.execute('4')
         captured=capsys.readouterr()
-        assert "Only two aguments must be given" in captured.out
+        assert "Only two arguments must be given" in captured.out
 
     def test_multiply_invalid_arg(self,multiply_command,capsys):
         '''Testing invalid argument'''
@@ -126,9 +128,8 @@ class TestMultiplyCommand:
             captured = capsys.readouterr()
             assert "Error" in captured.out
 
-# Testing the Multiply command:
-
 class TestDivideCommand:
+    '''# Testing the divide command:'''
     def test_Divide(self,divide_command,capsys):
         '''Testing Divide command'''
         divide_command.execute('4','2')
@@ -139,7 +140,7 @@ class TestDivideCommand:
         '''Testing one argument'''
         divide_command.execute('4')
         captured=capsys.readouterr()
-        assert "Only two aguments must be given" in captured.out
+        assert "Only two arguments must be given" in captured.out
 
     def test_Divide_invalid_arg(self,divide_command,capsys):
         '''Testing invalid argument'''
@@ -160,7 +161,6 @@ class TestDivideCommand:
             captured = capsys.readouterr()
             assert "Error" in captured.out
 
-# Testing menu command
 class TestMenuCommand:
     '''Test the Menu command'''
     def test_menu_command(self, menu_command, capsys):

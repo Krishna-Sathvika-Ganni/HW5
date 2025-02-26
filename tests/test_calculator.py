@@ -28,7 +28,7 @@ def test_multiplication():
 def test_division():
     '''Test that Division function works'''
     x=fake.random_int(min=0,max=50)
-    y=fake.random_int(min=0,max=50)
+    y=fake.random_int(min=1,max=50)
     expected=x/y
     assert Calculator.divide(x,y)==expected
 

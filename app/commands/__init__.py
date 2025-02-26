@@ -1,22 +1,23 @@
 from abc import ABC, abstractmethod
 
 class Command(ABC):
-    '''This is the abstract base for commands'''
+    '''This is the abstract base for commands.'''
     @abstractmethod
     def execute(self,*args):
         pass
 
 class CommandHandler:
+    '''This is the CommandHandler class.'''
     def __init__(self):
         self.commands={}
     
     def Register_Command(self, command_name: str, command: Command):
-        '''This function registers a command'''
+        '''This function registers a command.'''
         self.commands[command_name]=command
         print(f"Registered command: {command_name}")
     
     def Execute_Command(self, command_name: str, *args):
-        '''If it exists, executes a registered command'''
+        '''Executes a registered command if exists'''
         try:
             if command_name in self.commands:
                 self.commands[command_name].execute(*args)

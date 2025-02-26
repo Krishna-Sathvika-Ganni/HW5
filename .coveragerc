@@ -3,3 +3,5 @@ omit =
     *main.py
     tests/conftest.py
     tests/__init__.py
+exclude_lines=
+    raise SystemExit
