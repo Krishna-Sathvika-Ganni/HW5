@@ -2,10 +2,16 @@ from decimal import Decimal, InvalidOperation
 from app.calculator import Calculator
 from app.commands import Command
 
-class Add(Command):
-    '''This is the add command class'''
+class Multiply(Command):
+<<<<<<< HEAD:app/commands/multiplycommand.py
+    '''This is the Multiply command class'''
+=======
+    def __init__(self, command_handler):
+        self.command_handler=command_handler
+        
+>>>>>>> Plugins:app/plugins/multiplycommand.py
     def execute(self, *args):
-        if not args:  # This prompts for input, if arguments are not given.
+        if not args:  # This prompts for input, if arguments are not given
             args = input("Enter two numbers separated by space: ").split()
         if len(args) != 2:  # Makes sure that only two arguments must be given
             print("Only two arguments must be given")
@@ -13,11 +19,11 @@ class Add(Command):
 
         try:
             x, y = map(Decimal, args)  
-            result = Calculator.add(x, y)
-            print(f"{x} + {y} = {result}")
+            result = Calculator.multiply(x, y)
+            print(f"{x} x {y} = {result}")
         except InvalidOperation:
             print(f"One of the entered numbers is invalid. Please enter valid inputs.")
-        except ValueError as ve: 
+        except ValueError as ve:  
             print(f"{ve}")
         except Exception as e:
             print(f"{e}")

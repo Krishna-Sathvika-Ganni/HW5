@@ -21,8 +21,10 @@ class CommandHandler:
         try:
             if command_name in self.commands:
                 self.commands[command_name].execute(*args)
+                return True
             else:
-                print(f"{command_name} :Command not found")
+                print(f"{command_name} : Command not found")
+                return False
         except (KeyError, TypeError):
             print(f"{command_name} : There is no such command or invalid arguments for the command are given")
 

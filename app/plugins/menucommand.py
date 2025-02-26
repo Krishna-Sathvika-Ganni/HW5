@@ -13,6 +13,6 @@ class Menu(Command):
             print("There are no commands")
             return
         print("Commands Available:")
-        for command_name in commands:
-            print(f"-> {command_name}") 
+        for command in commands:
+            print(f"-> {command}") 
         print("Type 'exit' to quit" )

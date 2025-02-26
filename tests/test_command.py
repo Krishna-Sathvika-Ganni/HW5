@@ -1,5 +1,6 @@
 # pylint: disable=missing-class-docstring
 '''This is test_command file'''
+<<<<<<< HEAD
 from unittest.mock import patch
 import pytest
 from app.commands.addcommand import Add
@@ -39,6 +40,51 @@ def menu_command():
     command_handler = MockCommandHandler()
     return Menu(command_handler)
 
+=======
+from unittest.mock import Mock, patch
+import pytest
+from app.plugins.addcommand import Add
+from app.plugins.subtractcommand import Subtract
+from app.plugins.multiplycommand import Multiply
+from app.plugins.dividecommand import Divide
+from app.plugins.menucommand import Menu
+
+@pytest.fixture
+def mock_command_handler():
+    '''Mock_command_handler'''
+    mock_handler=Mock()
+    mock_handler.Register_Command=Mock()
+    mock_handler.Execute_Command=Mock()
+    return mock_handler
+
+@pytest.fixture
+def add_command(mock_command_handler):
+    '''Fixture'''
+    return Add(command_handler=mock_command_handler)
+
+@pytest.fixture
+def subtract_command(mock_command_handler):
+    '''Fixture'''
+    return Subtract(command_handler=mock_command_handler)
+
+@pytest.fixture
+def multiply_command(mock_command_handler):
+    '''Fixture'''
+    return Multiply(command_handler=mock_command_handler)
+
+@pytest.fixture
+def divide_command(mock_command_handler):
+    '''Fixture'''
+    return Divide(command_handler=mock_command_handler)
+
+@pytest.fixture
+def menu_command(mock_command_handler):
+    '''Fixture for Menu Command'''
+    # Correct the MockCommandHandler to return the list of commands
+    mock_command_handler.Get_Registered_Commands = Mock(return_value=["Add", "Subtract", "Multiply", "Divide", "Menu"])
+    return Menu(command_handler=mock_command_handler)
+# Testing the add command
+>>>>>>> Plugins
 class TestAddCommand:
     '''Test the Add command.'''
     def test_add(self,add_command, capsys):
@@ -61,6 +107,7 @@ class TestAddCommand:
 
     def test_add_error(self, add_command, capsys):
         '''Testing for invalid arguments'''
+<<<<<<< HEAD
         with patch('app.commands.addcommand.Calculator.add', side_effect=ValueError("Error")):
             add_command.execute('4', '2')
             captured = capsys.readouterr()
@@ -68,6 +115,14 @@ class TestAddCommand:
 
 class TestSubtractCommand:
     '''Testing the subtract command'''
+=======
+        with patch('app.plugins.addcommand.Calculator.add', side_effect=ValueError("Error")):
+            add_command.execute('4', '2')
+            captured = capsys.readouterr()
+            assert "Error" in captured.out
+# Testing the subtract command
+class TestSubtractCommand:
+>>>>>>> Plugins
     def test_subtract(self,subtract_command,capsys):
         '''Testing multiply command'''            
         subtract_command.execute('4','2')
@@ -94,15 +149,24 @@ class TestSubtractCommand:
 
     def test_subtract_error(self, subtract_command, capsys):
         '''Testing for invalid arguments'''
+<<<<<<< HEAD
         with patch('app.commands.subtractcommand.Calculator.subtract', side_effect=ValueError("Error")):
+=======
+        with patch('app.plugins.subtractcommand.Calculator.subtract', side_effect=ValueError("Error")):
+>>>>>>> Plugins
             subtract_command.execute('4', '2')
             captured = capsys.readouterr()
             assert "Error" in captured.out
 
 
+<<<<<<< HEAD
 
 class TestMultiplyCommand:
     '''Testing the Multiply command:'''
+=======
+# Testing the Multiply command:
+class TestMultiplyCommand:
+>>>>>>> Plugins
     def test_multiply(self,multiply_command,capsys):
         '''Testing multiply command'''
         multiply_command.execute('4','2')
@@ -113,7 +177,11 @@ class TestMultiplyCommand:
         '''Testing one argument'''
         multiply_command.execute('4')
         captured=capsys.readouterr()
+<<<<<<< HEAD
         assert "Only two arguments must be given" in captured.out
+=======
+        assert "Only two aguments must be given" in captured.out
+>>>>>>> Plugins
 
     def test_multiply_invalid_arg(self,multiply_command,capsys):
         '''Testing invalid argument'''
@@ -123,13 +191,23 @@ class TestMultiplyCommand:
 
     def test_multiply_error(self, multiply_command, capsys):
         '''Testing for invalid arguments'''
+<<<<<<< HEAD
         with patch('app.commands.multiplycommand.Calculator.multiply', side_effect=ValueError("Error")):
+=======
+        with patch('app.plugins.multiplycommand.Calculator.multiply', side_effect=ValueError("Error")):
+>>>>>>> Plugins
             multiply_command.execute('4', '2')
             captured = capsys.readouterr()
             assert "Error" in captured.out
 
+<<<<<<< HEAD
 class TestDivideCommand:
     '''# Testing the divide command:'''
+=======
+# Testing the Multiply command:
+
+class TestDivideCommand:
+>>>>>>> Plugins
     def test_Divide(self,divide_command,capsys):
         '''Testing Divide command'''
         divide_command.execute('4','2')
@@ -140,7 +218,11 @@ class TestDivideCommand:
         '''Testing one argument'''
         divide_command.execute('4')
         captured=capsys.readouterr()
+<<<<<<< HEAD
         assert "Only two arguments must be given" in captured.out
+=======
+        assert "Only two aguments must be given" in captured.out
+>>>>>>> Plugins
 
     def test_Divide_invalid_arg(self,divide_command,capsys):
         '''Testing invalid argument'''
@@ -156,11 +238,19 @@ class TestDivideCommand:
 
     def test_divide_error(self, divide_command, capsys):
         '''Testing for invalid arguments'''
+<<<<<<< HEAD
         with patch('app.commands.dividecommand.Calculator.divide', side_effect=ValueError("Error")):
+=======
+        with patch('app.plugins.dividecommand.Calculator.divide', side_effect=ValueError("Error")):
+>>>>>>> Plugins
             divide_command.execute('4', '2')
             captured = capsys.readouterr()
             assert "Error" in captured.out
 
+<<<<<<< HEAD
+=======
+# Testing menu command
+>>>>>>> Plugins
 class TestMenuCommand:
     '''Test the Menu command'''
     def test_menu_command(self, menu_command, capsys):
