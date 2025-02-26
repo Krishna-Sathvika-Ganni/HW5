@@ -1,3 +1,4 @@
+from importlib.metadata.diagnose import inspect
 import pkgutil
 import importlib
 from app.commands import CommandHandler, Command
@@ -10,7 +11,7 @@ class App:
         self.load_plugins()  # Automatically load plugins
 
     def load_plugins(self):
-        """Dynamically load all plugins from the `app/plugins` directory."""
+        '''Dynamically loading the plugins'''
         plugins_package = "app.plugins"
         for _, plugin_name, _ in pkgutil.iter_modules([plugins_package.replace(".", "/")]):
             try:
